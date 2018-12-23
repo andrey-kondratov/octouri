@@ -1,0 +1,10 @@
+/* src/constants/ActionTypes.js */
+
+export const RELOAD = 'RELOAD';
+export const CHANGE_SETTINGS_VISIBILITY = 'CHANGE_SETTINGS_VISIBILITY';
+export const FILL_ENVIRONMENTS = 'FILL_ENVIRONMENTS';
+export const SELECT_ENVIRONMENT = 'SELECT_ENVIRONMENT';
+export const SHOW_SNACKBAR = 'SHOW_SNACKBAR';
+export const HIDE_SNACKBAR = 'HIDE_SNACKBAR';
+export const SHOW_PROGRESS = 'SHOW_PROGRESS';
+export const HIDE_PROGRESS = 'HIDE_PROGRESS';
