@@ -76,7 +76,7 @@
     "dev": "nf start",
     "electron-dev": "set ELECTRON_START_URL=http://localhost:5000 && electron .",
     "electron": "electron .",
-    "electron-package": "electron-packager ."
+    "electron-package": "electron-packager . --asar"
   },
   "browserslist": [
     ">0.2%",
