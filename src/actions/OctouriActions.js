@@ -5,8 +5,10 @@ import { status, json } from '../utils/requests';
 import { getServerUrl, getUserApiKey, getEnvironments } from '../selectors';
 import { DEFAULT_ENVIRONMENTS_FETCH_PAGE_SIZE, DEFAULT_MACHINES_FETCH_PAGE_SIZE } from '../constants/defaults';
 import { showSuccess, showInfo, showError, showWarning } from './SnackbarActions';
+const { shell } = window.require('electron');
+const { spawn } = window.require('child_process');
 
-export const initialize = (url, apiKey) => (dispatch, getState) => {
+export const initialize = (url, apiKey) => (dispatch) => {
     if (!url || !apiKey) {
         dispatch(showError(`Configuration error.`));
         dispatch(showSettings());
@@ -45,7 +47,7 @@ export const initialize = (url, apiKey) => (dispatch, getState) => {
             dispatch(showSuccess(`Connected as ${data.DisplayName}.`));
             dispatch(fillEnvironments());
         })
-        .catch(error => {
+        .catch(() => {
             server.connecting = false;
 
             dispatch(reload(server, user));
@@ -115,7 +117,7 @@ const fillEnvironments = () => (dispatch, getState) => {
                 type: types.FILL_ENVIRONMENTS,
                 environments: environments
             });
-            
+
             dispatch(hideProgress());
         })
         .catch(error => {
@@ -168,11 +170,6 @@ export const selectEnvironment = id => (dispatch, getState) => {
                     status: item.Status,
                     healthStatus: item.HealthStatus,
                     statusSummary: item.StatusSummary
-                }))
-                .map(item => ({
-                    ...item,
-                    explorer: '\\\\' + item.ip + '\\c$\\',
-                    rdp: `rdp://full%20address=s:${item.ip}:3389`
                 }));
 
             dispatch({
@@ -181,7 +178,7 @@ export const selectEnvironment = id => (dispatch, getState) => {
             });
             dispatch(hideProgress());
         })
-        .catch(error => {
+        .catch(() => {
             dispatch(showError(`Failed to list machines in ${environment.name}.`));
             dispatch(hideProgress());
         });
@@ -194,3 +191,17 @@ export const showProgress = () => ({
 export const hideProgress = () => ({
     type: types.HIDE_PROGRESS
 });
+
+export const openExplorer = environment => dispatch => {
+    const path = `\\\\${environment.ip}\\c$\\`;
+
+    dispatch(showInfo(`Opening ${path} in explorer...`));
+    spawn('explorer', [path]);
+};
+
+export const openRDP = environment => dispatch => {
+    const ip = environment.ip;
+
+    dispatch(showInfo(`Opening ${ip} in Remote Desktop...`));
+    spawn('mstsc', [`/v:${ip}`, '/f']);
+}

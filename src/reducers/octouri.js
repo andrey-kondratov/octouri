@@ -35,7 +35,10 @@ export default function octouri(state = initialState, action) {
                 server: action.server,
                 user: action.user,
                 environments: [],
-                machines: []
+                environment: {
+                    name: '',
+                    machines: []
+                }
             }
         case types.FILL_ENVIRONMENTS:
             return { ...state, environments: action.environments };

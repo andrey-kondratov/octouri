@@ -10,9 +10,9 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
-import { Chip, Typography } from '@material-ui/core';
+import { Chip, Typography, Icon } from '@material-ui/core';
 import ClickToSelect from '@mapbox/react-click-to-select';
-const { shell } = window.require('electron');
+import { openExplorer, openRDP } from '../actions/OctouriActions';
 
 const styles = theme => ({
     root: {
@@ -33,7 +33,7 @@ function getStatusColor(row) {
 }
 
 function MachinesTable(props) {
-    const { classes, machines } = props;
+    const { classes, machines, dispatch } = props;
 
     return (
         <Paper className={classes.root}>
@@ -68,16 +68,14 @@ function MachinesTable(props) {
                                         <Chip key={role} label={role} style={{ marginRight: 2 }} />))}
                                 </TableCell>
                                 <TableCell align="right">
-                                    {row.roles && row.roles.indexOf('linux') === -1 ? (
-                                        <span>
-                                            <Tooltip title="Start RDP session">
-                                                <Button onClick={() => shell.openExternal(row.rdp)}>RDP</Button>
-                                            </Tooltip>
-                                            <Tooltip title={`Browse ${row.explorer}`}>
-                                                <Button onClick={() => shell.openExternal(row.explorer)}>C:\</Button>
-                                            </Tooltip>
-                                        </span>
-                                    ) : null}
+                                    <span>
+                                        <Tooltip title="Start RDP session">
+                                            <Button onClick={() => dispatch(openRDP(row))}>RDP</Button>
+                                        </Tooltip>
+                                        <Tooltip title="Browse C:\">
+                                            <Button onClick={() => dispatch(openExplorer(row))}>C:\</Button>
+                                        </Tooltip>
+                                    </span>
                                 </TableCell>
                             </TableRow>
                         );
