@@ -37,8 +37,8 @@ class ButtonAppBar extends Component {
       <div className={classes.root}>
         <AppBar color="default">
           <Toolbar>
-            <img alt="octouri" width={48} src="octopus.png" />
-            <Typography variant="h4" className={classes.title}>
+            {/* <img alt="octouri" width={48} src="octopus.png" /> */}
+            <Typography variant="h5" className={classes.title}>
               {this.props.hostname}
             </Typography>
             {this.props.allowReconnect ? (
