@@ -1,7 +1,10 @@
 This project is built using Electron.
 
-## Starting the app
+## Building and launching
 
-1. `npm install`
-2. `npm start` (close the browser afterwards)
-3. `npm run electron`
+`npm run build`
+`npm run electron`
+
+## Development
+
+`npm run dev`

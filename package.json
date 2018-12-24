@@ -2,11 +2,10 @@
   "name": "octouri",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
   "devDependencies": {
-    "electron": "^1.8.8",
-    "electron-packager": "^13.0.1",
-    "redux-devtools": "^3.5.0",
-    "webpack-cli": "^3.1.2"
+    "electron": "^4.0.0",
+    "foreman": "^3.0.1"
   },
   "dependencies": {
     "@babel/core": "7.1.0",
@@ -75,9 +74,9 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom",
-    "electron": "electron .",
-    "package": "electron-packager . octouri"
+    "dev": "nf start",
+    "electron-dev": "set ELECTRON_START_URL=http://localhost:5000 && electron .",
+    "electron": "electron ."
   },
   "browserslist": [
     ">0.2%",
