@@ -1,10 +1,11 @@
 {
   "name": "octouri",
-  "version": "0.1.0",
+  "version": "3.0.0",
   "private": true,
   "homepage": "./",
   "devDependencies": {
     "electron": "^4.0.0",
+    "electron-packager": "^13.0.1",
     "foreman": "^3.0.1"
   },
   "dependencies": {
@@ -76,7 +77,8 @@
     "build": "node scripts/build.js",
     "dev": "nf start",
     "electron-dev": "set ELECTRON_START_URL=http://localhost:5000 && electron .",
-    "electron": "electron ."
+    "electron": "electron .",
+    "electron-package": "electron-packager ."
   },
   "browserslist": [
     ">0.2%",
