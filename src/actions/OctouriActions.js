@@ -5,7 +5,6 @@ import { status, json } from '../utils/requests';
 import { getServerUrl, getUserApiKey, getEnvironments } from '../selectors';
 import { DEFAULT_ENVIRONMENTS_FETCH_PAGE_SIZE, DEFAULT_MACHINES_FETCH_PAGE_SIZE } from '../constants/defaults';
 import { showSuccess, showInfo, showError, showWarning } from './SnackbarActions';
-const { shell } = window.require('electron');
 const { spawn } = window.require('child_process');
 
 export const initialize = (url, apiKey) => (dispatch) => {

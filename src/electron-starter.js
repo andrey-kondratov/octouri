@@ -1,11 +1,5 @@
-const electron = require('electron');
-// Module to control application life.
-const app = electron.app;
-// Module to create native browser window.
-const BrowserWindow = electron.BrowserWindow;
-
-const path = require('path');
-const url = require('url');
+const { app, BrowserWindow } = require('electron');
+const settings = require('electron-settings');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -14,10 +8,19 @@ let mainWindow;
 function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
-        width: 1200, height: 800, minWidth: 500,
+        width: settings.get('window.width', 800), 
+        height: settings.get('window.height', 600),
+        minWidth: 500,
         webPreferences: {
             webSecurity: false
         }
+    });
+
+    mainWindow.on('resize', () => {
+        let { width, height } = mainWindow.getBounds();
+
+        settings.set('window.width', width);
+        settings.set('window.height', height);
     });
 
     // and load the index.html of the app.

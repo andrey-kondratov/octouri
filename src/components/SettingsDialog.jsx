@@ -12,6 +12,7 @@ import { Tooltip } from '@material-ui/core';
 
 import { initialize, hideSettings, showSettings } from '../actions/OctouriActions';
 import { DEFAULT_URL, DEFAULT_API_KEY } from '../constants/defaults';
+const settings = window.require('electron-settings');
 
 class SettingsDialog extends React.Component {
     constructor(props) {
@@ -19,8 +20,8 @@ class SettingsDialog extends React.Component {
 
         this.state = {
             open: props.open,
-            url: props.url || DEFAULT_URL,
-            apiKey: props.apiKey || DEFAULT_API_KEY
+            url: props.url || settings.get('url', DEFAULT_URL),
+            apiKey: props.apiKey || settings.get('apiKey', DEFAULT_API_KEY)
         }
 
         this.onChange = this.onChange.bind(this);
@@ -29,7 +30,7 @@ class SettingsDialog extends React.Component {
 
     componentDidMount() {
         const { dispatch } = this.props;
-        dispatch(initialize(DEFAULT_URL, DEFAULT_API_KEY));
+        dispatch(initialize(this.state.url, this.state.apiKey));
     }
 
     componentDidUpdate(prevProps) {
@@ -53,6 +54,9 @@ class SettingsDialog extends React.Component {
     onApply = () => {
         const url = this.state.url;
         const apiKey = this.state.apiKey;
+
+        settings.set('url', url);
+        settings.set('apiKey', apiKey);
 
         this.props.dispatch(initialize(url, apiKey));
     };

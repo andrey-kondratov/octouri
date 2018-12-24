@@ -10,7 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
-import { Chip, Typography, Icon } from '@material-ui/core';
+import { Chip, Typography } from '@material-ui/core';
 import ClickToSelect from '@mapbox/react-click-to-select';
 import { openExplorer, openRDP } from '../actions/OctouriActions';
 

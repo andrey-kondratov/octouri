@@ -1,6 +1,6 @@
-import { INFO } from "./snackbar";
-
 /* src/constants/defaults.js */
+
+import { INFO } from "./snackbar";
 
 export const DEFAULT_URL = '';
 export const DEFAULT_API_KEY = '';
