@@ -112,6 +112,8 @@ const fillEnvironments = () => (dispatch, getState) => {
                     description: item.description
                 }));
 
+            environments.sort((a, b) => a.name.localeCompare(b.name));
+
             dispatch({
                 type: types.FILL_ENVIRONMENTS,
                 environments: environments
@@ -170,6 +172,8 @@ export const selectEnvironment = id => (dispatch, getState) => {
                     healthStatus: item.HealthStatus,
                     statusSummary: item.StatusSummary
                 }));
+
+            environment.machines.sort((a, b) => a.ip.localeCompare(b.ip));
 
             dispatch({
                 type: types.SELECT_ENVIRONMENT,
