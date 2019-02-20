@@ -13,7 +13,7 @@ script:
   - npm run build
 
 before_deploy:
-  - if [[ -n $TRAVIS_TAG ]]; then ./publish.sh $TRAVIS_TAG.$TRAVIS_BUILD_NUMBER; fi
+  - if [[ -n $TRAVIS_TAG ]]; then ./publish.sh $TRAVIS_TAG; fi
 
 deploy:
   - provider: pages
@@ -28,6 +28,6 @@ deploy:
       tags: true
     file_glob: true
     file: ./octouri-win32-x64-$TRAVIS_TAG.zip
-    name: v$TRAVIS_TAG
+    name: $TRAVIS_TAG
     tag_name: $TRAVIS_TAG
     draft: true
