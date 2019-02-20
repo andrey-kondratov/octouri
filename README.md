@@ -1,10 +1,9 @@
+[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)
+[![Build Status](https://travis-ci.org/andead/githubext.svg?branch=master)](https://travis-ci.org/andead/githubext)
+
 # Octouri
 
 A simple UI for navigating environments and machines using Octopus Deploy API.
-
-## Downloads
-
-The latest binaries are [here](https://github.com/andead/octouri/releases/latest).
 
 ## Configuration
 
