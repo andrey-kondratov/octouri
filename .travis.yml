@@ -27,8 +27,7 @@ deploy:
     on:
       tags: true
     file_glob: true
-    file: ./octouri-win32-x64.zip
+    file: ./octouri-win32-x64-$TRAVIS_TAG.zip
     name: v$TRAVIS_TAG
     tag_name: $TRAVIS_TAG
-    body: $TRAVIS_COMMIT_MESSAGE
     draft: true
