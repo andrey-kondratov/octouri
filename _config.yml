@@ -1,2 +1,5 @@
 theme: jekyll-theme-tactile
 show_downloads: true
+google_analytics: UA-134841604-1
+github:
+  latest_release_url: https://github.com/andead/octouri/releases/latest
