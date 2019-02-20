@@ -10,5 +10,5 @@ fi
 output=octouri-win32-x64
 filename=octouri-win32-x64$suffix.zip
 
-npm run electron-package
+npm run electron-package -- --platform win32
 zip -9DmrT $filename $output
