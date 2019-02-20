@@ -1,5 +1,5 @@
 [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)
-[![Build Status](https://travis-ci.org/andead/githubext.svg?branch=master)](https://travis-ci.org/andead/githubext)
+[![Build Status](https://travis-ci.org/andead/octouri.svg?branch=master)](https://travis-ci.org/andead/octouri)
 
 # Octouri
 
