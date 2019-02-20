@@ -1,3 +1,9 @@
+sudo: required
+addons:
+  apt:
+    packages:
+    - wine1.6
+    
 language: node_js
 node_js: 
   - "8"
