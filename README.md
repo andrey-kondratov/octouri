@@ -11,6 +11,8 @@ A simple UI for navigating environments and machines using Octopus Deploy API.
 2. Input the URL of your Octopus installation and the API key (from your Octopus profile page).
 3. Click `Apply`. The settings will be saved in your profile folder (usually AppData). 
 
+![Settings window](https://github.com/andead/octouri/blob/master/assets/settings.png)
+
 ## Usage
 
 At the startup, the application will attempt to connect to your Octopus instance according to the settings you provided. 
