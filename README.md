@@ -11,7 +11,7 @@ A simple UI for navigating environments and machines using Octopus Deploy API.
 2. Input the URL of your Octopus installation and the API key (from your Octopus profile page).
 3. Click `Apply`. The settings will be saved in your profile folder (usually AppData). 
 
-![Settings window](https://github.com/andead/octouri/blob/master/assets/settings.png)
+![Settings window](https://raw.githubusercontent.com/andead/octouri/master/assets/settings.png)
 
 ## Usage
 
@@ -19,7 +19,7 @@ At the startup, the application will attempt to connect to your Octopus instance
 
 From now on you can select the environment from the dropdown in the top panel and browse the list of machines, seeing their health status, IP addresses and roles. You may also open the RDP client or open Explorer to browse drive C:\\.
 
-![Main window](https://github.com/andead/octouri/blob/master/assets/list.png)
+![Main window](https://raw.githubusercontent.com/andead/octouri/master/assets/list.png)
 
 ## Platforms
 
