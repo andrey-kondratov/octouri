@@ -19,6 +19,8 @@ At the startup, the application will attempt to connect to your Octopus instance
 
 From now on you can select the environment from the dropdown in the top panel and browse the list of machines, seeing their health status, IP addresses and roles. You may also open the RDP client or open Explorer to browse drive C:\\.
 
+![Main window](https://github.com/andead/octouri/blob/master/assets/list.png)
+
 ## Platforms
 
 The application is built using Electron and can be compiled for any platform, although the features for launching RDP and explorer only make sense on Windows.
