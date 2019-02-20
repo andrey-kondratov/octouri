@@ -1,0 +1,29 @@
+language: node_js
+node_js: 
+  - "8"
+if: branch = master OR tag IS present
+
+script:
+  - npm run build
+
+before_deploy:
+  - if [[ -n $TRAVIS_TAG ]]; then ./publish.sh $TRAVIS_TAG.$TRAVIS_BUILD_NUMBER; fi
+
+deploy:
+  - provider: pages
+    skip-cleanup: true
+    github-token: $GITHUB_TOKEN
+    keep-history: false
+    on:
+      branch: master
+  - provider: releases
+    api_key: $GITHUB_TOKEN
+    skip_cleanup: true
+    on:
+      tags: true
+    file_glob: true
+    file: ./octouri-win32-x64.zip
+    name: v$TRAVIS_TAG
+    tag_name: $TRAVIS_TAG
+    body: $TRAVIS_COMMIT_MESSAGE
+    draft: true
