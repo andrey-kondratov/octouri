@@ -37,12 +37,11 @@ class ButtonAppBar extends Component {
       <div className={classes.root}>
         <AppBar color="default">
           <Toolbar>
-            {/* <img alt="octouri" width={48} src="octopus.png" /> */}
             <Typography variant="h5" className={classes.title}>
               {this.props.hostname}
             </Typography>
             {this.props.allowReconnect ? (
-              <Tooltip title="Reconnect">
+              <Tooltip title="Reload">
                 <IconButton onClick={this.onReconnect}>
                   <Icon>refresh</Icon>
                 </IconButton>
@@ -64,7 +63,7 @@ ButtonAppBar.propTypes = {
 const mapStateToProps = state => ({
   url: state.octouri.server.url,
   hostname: state.octouri.server.hostname,
-  allowReconnect: !state.octouri.server.connecting && !state.octouri.server.connected
+  allowReconnect: state.octouri.server && !state.octouri.server.connecting
 });
 
 export default connect(mapStateToProps)(withStyles(styles)(ButtonAppBar));

@@ -2,10 +2,11 @@
 
 import * as types from '../constants/ActionTypes';
 import { status, json } from '../utils/requests';
-import { getServerUrl, getUserApiKey, getEnvironments } from '../selectors';
+import { getServerUrl, getUserApiKey, getEnvironments, getEnvironment, getLastEnvironmentId } from '../selectors';
 import { DEFAULT_ENVIRONMENTS_FETCH_PAGE_SIZE, DEFAULT_MACHINES_FETCH_PAGE_SIZE } from '../constants/defaults';
 import { showSuccess, showInfo, showError, showWarning } from './SnackbarActions';
 const { spawn } = window.require('child_process');
+const _ = require('lodash');
 
 export const initialize = (url, apiKey) => (dispatch) => {
     if (!url || !apiKey) {
@@ -35,16 +36,26 @@ export const initialize = (url, apiKey) => (dispatch) => {
     })
         .then(status)
         .then(json)
-        .then(data => {
-            server.connecting = false;
-            server.connected = true;
-            user.username = data.Username;
-            user.displayName = data.DisplayName;
+        .then(me => {
+            window.fetch(`${url}/api`, {
+                headers: {
+                    'X-Octopus-ApiKey': `${apiKey}`
+                }
+            })
+                .then(status)
+                .then(json)
+                .then(api => {
+                    server.connecting = false;
+                    server.connected = true;
+                    user.username = me.Username;
+                    user.displayName = me.DisplayName;
 
-            dispatch(reload(server, user));
-            dispatch(hideSettings());
-            dispatch(showSuccess(`Connected as ${data.DisplayName}.`));
-            dispatch(fillEnvironments());
+                    dispatch(reload(server, user));
+                    dispatch(hideSettings());
+
+                    dispatch(showSuccess(`Connected as ${me.DisplayName}, API version ${api.ApiVersion}.`));
+                    dispatch(fillEnvironments());
+                })
         })
         .catch(() => {
             server.connecting = false;
@@ -57,12 +68,19 @@ export const initialize = (url, apiKey) => (dispatch) => {
 
 export const retryInitialize = () => (dispatch, getState) => {
     const state = getState();
+    const environment = getEnvironment(state);
+    dispatch(updateLastEnvironmentId(environment.id));
 
     const url = getServerUrl(state);
     const apiKey = getUserApiKey(state);
 
     dispatch(initialize(url, apiKey));
 };
+
+const updateLastEnvironmentId = value => ({
+    type: types.UPDATE_LAST_ENVIRONMENT_ID,
+    value
+})
 
 const reload = (server, user) => ({
     type: types.RELOAD,
@@ -88,6 +106,7 @@ const fillEnvironments = () => (dispatch, getState) => {
     const state = getState();
     const url = getServerUrl(state);
     const apiKey = getUserApiKey(state);
+    const lastEnvironmentId = getLastEnvironmentId(state);
 
     if (!url || !apiKey) {
         dispatch({
@@ -105,14 +124,14 @@ const fillEnvironments = () => (dispatch, getState) => {
         .then(status)
         .then(json)
         .then(data => {
-            const environments = data.Items
+            let environments = data.Items
                 .map(item => ({
                     id: item.Id,
                     name: item.Name,
                     description: item.description
                 }));
 
-            environments.sort((a, b) => a.name.localeCompare(b.name));
+            environments = _.orderBy(environments, ['name']);
 
             dispatch({
                 type: types.FILL_ENVIRONMENTS,
@@ -120,6 +139,10 @@ const fillEnvironments = () => (dispatch, getState) => {
             });
 
             dispatch(hideProgress());
+
+            if (lastEnvironmentId) {
+                dispatch(selectEnvironment(lastEnvironmentId));
+            }
         })
         .catch(error => {
             alert(error);
@@ -161,7 +184,7 @@ export const selectEnvironment = id => (dispatch, getState) => {
         .then(status)
         .then(json)
         .then(data => {
-            environment.machines = data.Items
+            let machines = data.Items
                 .map(item => ({
                     id: item.Id,
                     name: item.Name,
@@ -173,7 +196,8 @@ export const selectEnvironment = id => (dispatch, getState) => {
                     statusSummary: item.StatusSummary
                 }));
 
-            environment.machines.sort((a, b) => a.ip.localeCompare(b.ip));
+            machines = _.orderBy(machines, ['ip']);
+            environment.machines = machines;
 
             dispatch({
                 type: types.SELECT_ENVIRONMENT,

@@ -17,9 +17,11 @@ const initialState = {
     },
     environments: [],
     environment: {
+        id: 0,
         name: '',
         machines: []
     },
+    lastEnvironmentId: 0,
     progress: {
         visible: false
     }
@@ -48,6 +50,8 @@ export default function octouri(state = initialState, action) {
             return { ...state, progress: { ...process, visible: true } };
         case types.HIDE_PROGRESS:
             return { ...state, progress: { ...process, visible: false } };
+        case types.UPDATE_LAST_ENVIRONMENT_ID:
+            return { ...state, lastEnvironmentId: action.value };
         default:
             return state;
     }
