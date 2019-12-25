@@ -1,8 +1,8 @@
 [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)
 [![Build Status](https://travis-ci.org/andead/octouri.svg?branch=master)](https://travis-ci.org/andead/octouri)
-[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/andead/octouri)](https://github.com/andead/octouri/releases/latest)
 ![GitHub last commit](https://img.shields.io/github/last-commit/andead/octouri)
-![GitHub All Releases](https://img.shields.io/github/downloads/andead/octouri/total)
+[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/andead/octouri)](https://github.com/andead/octouri/releases/latest)
+[![GitHub All Releases](https://img.shields.io/github/downloads/andead/octouri/v3.0.2/total?label=downloads)](https://github.com/andead/octouri/releases/latest)
 
 # Octouri
 
