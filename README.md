@@ -3,6 +3,7 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/andead/octouri)
 [![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/andead/octouri)](https://github.com/andead/octouri/releases/latest)
 [![GitHub All Releases](https://img.shields.io/github/downloads/andead/octouri/v3.0.2/total?label=downloads)](https://github.com/andead/octouri/releases/latest)
+[![Gitter](https://badges.gitter.im/octouri/community.svg)](https://gitter.im/octouri/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 # Octouri
 
