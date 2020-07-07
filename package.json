@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "./",
   "devDependencies": {
-    "electron": "^4.0.5",
+    "electron": "^7.2.4",
     "electron-packager": "^13.1.0",
     "foreman": "^3.0.1",
     "typescript": "^3.3.3"
